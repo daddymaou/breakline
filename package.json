@@ -1,0 +1,13 @@
+{
+  "name": "pool-3d",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser-based multiplayer 3D 9-ball pool – server authoritative",
+  "scripts": {
+    "install:all": "npm install --prefix client && npm install --prefix server",
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "client": "npm run dev --prefix client",
+    "server": "node server/index.js"
+  }
+}
