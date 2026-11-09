@@ -26,3 +26,9 @@ Create a table and share its five-character code with another player. The game b
 The server owns the match state and runs the shared fixed-timestep physics and nine-ball rules. Players send shot intent; both browsers play back the resulting shot and receive the same final state. The client handles rendering, input, and presentation.
 
 Breakline is built with Three.js, Vite, Socket.IO, and native Node.js modules. The `shared` directory contains the physics, table constants, and rules used by both client and server.
+
+## Deploying on Render
+
+The repository includes a Render Blueprint at [`render.yaml`](./render.yaml) that creates the Node.js game server and the static client. In Render, choose **New → Blueprint**, connect this repository, and apply the Blueprint. Render supplies the server hostname to the client build as `VITE_SERVER_URL`.
+
+The server exposes `/health` for Render health checks and listens on Render's assigned `PORT`. Free web services may take a short time to wake up after inactivity.

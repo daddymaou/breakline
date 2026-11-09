@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: breakline-server
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix server
+    startCommand: npm run start --prefix server
+    healthCheckPath: /health
+
+  - type: web
+    name: breakline-client
+    runtime: static
+    buildCommand: npm install --prefix client && npm run build --prefix client
+    staticPublishPath: ./client/dist
+    envVars:
+      - key: VITE_SERVER_URL
+        fromService:
+          type: web
+          name: breakline-server
+          property: host

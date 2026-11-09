@@ -6,7 +6,10 @@ import { io } from 'socket.io-client';
  * For production you can set VITE_SERVER_URL.
  */
 export function createNetwork({ onState, onShotResult, onMessage, onConnection }) {
-  const url = import.meta.env.VITE_SERVER_URL || undefined; // same origin + proxy
+  const configuredUrl = import.meta.env.VITE_SERVER_URL;
+  const url = configuredUrl
+    ? (/^https?:\/\//i.test(configuredUrl) ? configuredUrl : `https://${configuredUrl}`)
+    : undefined;
   const socket = io(url, {
     transports: ['websocket', 'polling'],
     autoConnect: false
